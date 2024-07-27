@@ -1,0 +1,9 @@
+{
+  "crmApp": {
+    "lead_status": {
+      "null": "",
+      "ASP": "ASP",
+      "ERP": "ERP"
+    }
+  }
+}

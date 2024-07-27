@@ -1,0 +1,9 @@
+{
+  "crmApp": {
+    "lead_source": {
+      "null": "",
+      "COLD_CALL": "COLD_CALL",
+      "ADVERTISEMENT": "ADVERTISEMENT"
+    }
+  }
+}
