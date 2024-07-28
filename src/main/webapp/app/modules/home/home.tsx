@@ -77,14 +77,10 @@ export const Home = () => {
                     <FontAwesomeIcon icon={faClock} /> Leads Converted
                   </CardTitle>
                   <CardText>Track recent customer interactions.</CardText>
-                  <img src="content/images/leads" alt="Recent Activities" className="cardimage" />
-                  <ListGroup flush>
-                    <ListGroupItem>Activity 1</ListGroupItem>
-                    <ListGroupItem>Activity 2</ListGroupItem>
-                    <ListGroupItem>Activity 3</ListGroupItem>
-                  </ListGroup>
+                  <img src="content/images/Leads.png" alt="Recent Activities" className="cardimage" />
+
                   <Button color="primary" block className="mt-3">
-                    View All Activities
+                    View All Process
                   </Button>
                 </CardBody>
               </Card>
