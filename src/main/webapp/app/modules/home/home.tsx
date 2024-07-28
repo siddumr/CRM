@@ -1,99 +1,368 @@
 import './home.scss';
-
-import React from 'react';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Translate } from 'react-jhipster';
-import { Row, Col, Alert } from 'reactstrap';
+import Slider from 'react-slick';
+import {
+  Row,
+  Col,
+  Card,
+  CardBody,
+  CardTitle,
+  CardText,
+  Button,
+  ListGroup,
+  ListGroupItem,
+  Collapse,
+  CardHeader,
+  Card as AccordionCard,
+  Container,
+} from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUsers, faChartLine, faTasks, faEnvelope, faFileAlt, faClock, faNewspaper, faPhone } from '@fortawesome/free-solid-svg-icons';
 
 import { useAppSelector } from 'app/config/store';
 
 export const Home = () => {
   const account = useAppSelector(state => state.authentication.account);
+  const [collapseOpen, setCollapseOpen] = useState(false);
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000, // 3 seconds
+  };
+
+  // Sample call logs data
+  const callLogs = [
+    { time: '09:00 AM', description: 'Call with Client A' },
+    { time: '10:30 AM', description: 'Follow-up with Lead B' },
+    { time: '01:00 PM', description: 'Meeting with Team' },
+  ];
 
   return (
-    <Row>
-      <Col md="3" className="pad">
-        <span className="hipster rounded" />
-      </Col>
-      <Col md="9">
-        <h1 className="display-4">
-          <Translate contentKey="home.title">Welcome, Java Hipster!</Translate>
-        </h1>
-        <p className="lead">
-          <Translate contentKey="home.subtitle">This is your homepage</Translate>
-        </p>
-        {account?.login ? (
-          <div>
-            <Alert color="success">
-              <Translate contentKey="home.logged.message" interpolate={{ username: account.login }}>
-                You are logged in as user {account.login}.
-              </Translate>
-            </Alert>
+    <div className="crm-container">
+      {account?.login ? (
+        <div className="crm-dashboard-container">
+          <h1 className="display-4 text-center">CRM Dashboard</h1>
+          <Row className="mt-4">
+            <Col md="4">
+              <Card className="mb-4">
+                <CardBody>
+                  <CardTitle tag="h5">
+                    <FontAwesomeIcon icon={faPhone} /> Total Calls Today
+                  </CardTitle>
+                  <CardText className="text-center">
+                    <h2 style={{ color: 'blue', fontSize: '70px' }}>15</h2> {/* Replace this with a dynamic value if needed */}
+                    <ListGroup className="mt-3">
+                      {callLogs.map((log, index) => (
+                        <ListGroupItem key={index}>
+                          <strong>{log.time}</strong>: {log.description}
+                        </ListGroupItem>
+                      ))}
+                    </ListGroup>
+                  </CardText>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col md="4">
+              <Card className="mb-4">
+                <CardBody>
+                  <CardTitle tag="h5">
+                    <FontAwesomeIcon icon={faClock} /> Leads Converted
+                  </CardTitle>
+                  <CardText>Track recent customer interactions.</CardText>
+                  <img src="content/images/leads" alt="Recent Activities" className="cardimage" />
+                  <ListGroup flush>
+                    <ListGroupItem>Activity 1</ListGroupItem>
+                    <ListGroupItem>Activity 2</ListGroupItem>
+                    <ListGroupItem>Activity 3</ListGroupItem>
+                  </ListGroup>
+                  <Button color="primary" block className="mt-3">
+                    View All Activities
+                  </Button>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col md="4">
+              <Card className="mb-4">
+                <CardBody>
+                  <CardTitle tag="h5">
+                    <FontAwesomeIcon icon={faChartLine} /> Sales Statistics
+                  </CardTitle>
+                  <CardText>Analyze your sales performance.</CardText>
+                  <img src="https://via.placeholder.com/150" alt="Sales Statistics" className="cardimage" />
+                  <ListGroup flush>
+                    <ListGroupItem>Today's Sales: $1000</ListGroupItem>
+                    <ListGroupItem>This Week: $5000</ListGroupItem>
+                    <ListGroupItem>This Month: $20000</ListGroupItem>
+                  </ListGroup>
+                  <Button color="primary" block className="mt-3">
+                    View Detailed Sales
+                  </Button>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+          <Row className="mt-4">
+            <Col md="4">
+              <Card className="mb-4">
+                <CardBody>
+                  <CardTitle tag="h5">
+                    <FontAwesomeIcon icon={faTasks} /> Tasks
+                  </CardTitle>
+                  <CardText>Organize and manage your tasks.</CardText>
+                  <img src="https://via.placeholder.com/150" alt="Tasks" className="cardimage" />
+                  <ListGroup flush>
+                    <ListGroupItem>Task 1: Meeting at 3 PM</ListGroupItem>
+                    <ListGroupItem>Task 2: Follow up with Client A</ListGroupItem>
+                    <ListGroupItem>Task 3: Prepare report</ListGroupItem>
+                  </ListGroup>
+                  <Button color="primary" block className="mt-3">
+                    View All Tasks
+                  </Button>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col md="4">
+              <Card className="mb-4">
+                <CardBody>
+                  <CardTitle tag="h5">
+                    <FontAwesomeIcon icon={faEnvelope} /> Messages
+                  </CardTitle>
+                  <CardText>Check your messages.</CardText>
+                  <img src="https://via.placeholder.com/150" alt="Messages" className="cardimage" />
+                  <ListGroup flush>
+                    <ListGroupItem>Message from Client B</ListGroupItem>
+                    <ListGroupItem>Follow-up on Proposal</ListGroupItem>
+                    <ListGroupItem>Team Meeting Notes</ListGroupItem>
+                  </ListGroup>
+                  <Button color="primary" block className="mt-3">
+                    View All Messages
+                  </Button>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col md="4">
+              <Card className="mb-4">
+                <CardBody>
+                  <CardTitle tag="h5">
+                    <FontAwesomeIcon icon={faFileAlt} /> Reports
+                  </CardTitle>
+                  <CardText>Generate and view reports.</CardText>
+                  <img src="https://via.placeholder.com/150" alt="Reports" className="cardimage" />
+                  <ListGroup flush>
+                    <ListGroupItem>Monthly Sales Report</ListGroupItem>
+                    <ListGroupItem>Customer Feedback Report</ListGroupItem>
+                    <ListGroupItem>Performance Analysis</ListGroupItem>
+                  </ListGroup>
+                  <Button color="primary" block className="mt-3">
+                    View All Reports
+                  </Button>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+        </div>
+      ) : (
+        <div className="text-center">
+          <h1 className="display-4">Welcome to Our CRM</h1>
+          <p className="lead">Manage your customer relationships effortlessly with our CRM system.</p>
+          <div className="slider-container">
+            <Slider {...sliderSettings}>
+              <div>
+                <img
+                  src="https://img.freepik.com/free-photo/3d-cartoon-scene-depicting-variety-people-multitasking_23-2151294503.jpg?t=st=1722147583~exp=1722151183~hmac=91e8d9a9fe71a4e55a67344f80d8f7b0ecd9ec137e40452a9e6e2e7a6a294484&w=996"
+                  alt="Slide 1"
+                  className="img-fluid"
+                />
+              </div>
+              <div>
+                <img
+                  src="https://img.freepik.com/free-photo/customer-relationship-management-concept_23-2150038418.jpg?ga=GA1.1.688353063.1686149813&semt=sph"
+                  alt="Slide 2"
+                  className="img-fluid"
+                />
+              </div>
+              <div>
+                <img
+                  src="https://img.freepik.com/free-photo/standard-quality-control-concept-m_23-2150041867.jpg?ga=GA1.1.688353063.1686149813&semt=sph"
+                  alt="Slide 3"
+                  className="img-fluid"
+                />
+              </div>
+            </Slider>
           </div>
-        ) : (
-          <div>
-            <Alert color="warning">
-              <Translate contentKey="global.messages.info.authenticated.prefix">If you want to </Translate>
-
-              <Link to="/login" className="alert-link">
-                <Translate contentKey="global.messages.info.authenticated.link"> sign in</Translate>
-              </Link>
-              <Translate contentKey="global.messages.info.authenticated.suffix">
-                , you can try the default accounts:
-                <br />- Administrator (login=&quot;admin&quot; and password=&quot;admin&quot;)
-                <br />- User (login=&quot;user&quot; and password=&quot;user&quot;).
-              </Translate>
-            </Alert>
-
-            <Alert color="warning">
-              <Translate contentKey="global.messages.info.register.noaccount">You do not have an account yet?</Translate>&nbsp;
-              <Link to="/account/register" className="alert-link">
-                <Translate contentKey="global.messages.info.register.link">Register a new account</Translate>
-              </Link>
-            </Alert>
+          {/* Our Services Section */}
+          <div className="our-services-container mt-5">
+            <h2 className="text-center mb-4">Our Services</h2>
+            <p className="ourservice">
+              Discover our wide range of services designed to help you manage customer relationships, analyze sales performance, and more.
+              Our CRM system offers a comprehensive solution to meet your business needs. From intuitive customer management tools to
+              advanced sales analytics, we provide everything you need to grow your business. Our task management features ensure that you
+              stay organized and on top of your priorities. With integrated messaging and detailed reporting capabilities, our CRM helps you
+              communicate effectively and make data-driven decisions. Experience the power of seamless customer relationship management with
+              our robust and user-friendly system.
+            </p>
           </div>
-        )}
-        <p>
-          <Translate contentKey="home.question">If you have any question on JHipster:</Translate>
-        </p>
-
-        <ul>
-          <li>
-            <a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer">
-              <Translate contentKey="home.link.homepage">JHipster homepage</Translate>
-            </a>
-          </li>
-          <li>
-            <a href="https://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer">
-              <Translate contentKey="home.link.stackoverflow">JHipster on Stack Overflow</Translate>
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer">
-              <Translate contentKey="home.link.bugtracker">JHipster bug tracker</Translate>
-            </a>
-          </li>
-          <li>
-            <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">
-              <Translate contentKey="home.link.chat">JHipster public chat room</Translate>
-            </a>
-          </li>
-          <li>
-            <a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer">
-              <Translate contentKey="home.link.follow">follow @jhipster on Twitter</Translate>
-            </a>
-          </li>
-        </ul>
-
-        <p>
-          <Translate contentKey="home.like">If you like JHipster, do not forget to give us a star on</Translate>{' '}
-          <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-          !
-        </p>
-      </Col>
-    </Row>
+          <Row className="mt-4">
+            <Col md="4">
+              <Card className="mb-4">
+                <CardBody>
+                  <CardTitle tag="h5">
+                    <FontAwesomeIcon icon={faUsers} /> Manage Customers
+                  </CardTitle>
+                  <img
+                    src="https://img.freepik.com/free-photo/rag-doll-blue-with-arms-two_1156-238.jpg?ga=GA1.1.688353063.1686149813&semt=ais_user"
+                    alt="Manage Customers"
+                    className="cardimage"
+                  />
+                  <CardText>Keep track of your customers and their interactions.</CardText>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col md="4">
+              <Card className="mb-4">
+                <CardBody>
+                  <CardTitle tag="h5">
+                    <FontAwesomeIcon icon={faChartLine} /> Sales Analytics
+                  </CardTitle>
+                  <img
+                    src="https://img.freepik.com/free-photo/rag-doll-pointing-with-stick-one-bar-graph_1156-260.jpg?ga=GA1.1.688353063.1686149813&semt=ais_user"
+                    alt="Sales Analytics"
+                    className="cardimage"
+                  />
+                  <CardText>Analyze your sales data to improve performance.</CardText>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col md="4">
+              <Card className="mb-4">
+                <CardBody>
+                  <CardTitle tag="h5">
+                    <FontAwesomeIcon icon={faTasks} /> Task Management
+                  </CardTitle>
+                  <img
+                    src="https://img.freepik.com/free-photo/rag-doll-with-red-pencil-checklist_1156-217.jpg?ga=GA1.1.688353063.1686149813&semt=ais_user"
+                    alt="Task Management"
+                    className="cardimage"
+                  />
+                  <CardText>Organize and prioritize your tasks efficiently.</CardText>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+          <Row className="mt-4">
+            <Col md="6">
+              <Card className="mb-4">
+                <CardBody>
+                  <CardTitle tag="h5">
+                    <FontAwesomeIcon icon={faEnvelope} /> Communication
+                  </CardTitle>
+                  <img
+                    src="https://img.freepik.com/free-photo/rag-dolls-red-circles_1156-232.jpg?ga=GA1.1.688353063.1686149813&semt=ais_user"
+                    alt="Communication"
+                    className="cardimage"
+                  />
+                  <CardText>Communicate with your clients through integrated messaging.</CardText>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col md="6">
+              <Card className="mb-4">
+                <CardBody>
+                  <CardTitle tag="h5">
+                    <FontAwesomeIcon icon={faFileAlt} /> Reporting
+                  </CardTitle>
+                  <img
+                    src="https://img.freepik.com/free-photo/rag-doll-teaching-bar-graph-others-rag-dolls_1156-247.jpg?ga=GA1.1.688353063.1686149813&semt=ais_user"
+                    alt="Reporting"
+                    className="cardimage"
+                  />
+                  <CardText>Generate detailed reports to track your progress.</CardText>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+          <Row className="mt-4">
+            <Col md="6">
+              <h2>Testimonials</h2>
+              <Card className="mb-4">
+                <CardBody>
+                  <CardText>"This CRM has transformed the way we manage our customer relationships!" - A Satisfied User</CardText>
+                </CardBody>
+              </Card>
+              <Card className="mb-4">
+                <CardBody>
+                  <CardText>"Our sales have increased by 50% since we started using this CRM." - Another Happy Customer</CardText>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col md="6">
+              <h2>Get Started</h2>
+              <Card className="mb-4">
+                <CardBody>
+                  <CardText>Sign up today and take your business to the next level with our powerful CRM tools.</CardText>
+                  <Button color="primary" size="lg" block>
+                    <Link to="/login" style={{ color: 'white', textDecoration: 'none' }}>
+                      View Demo
+                    </Link>
+                  </Button>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+          {/* Latest News Accordion */}
+          <Container className="latest-news-container mt-4">
+            <h2 className="text-center">Latest News</h2>
+            <AccordionCard>
+              <CardHeader onClick={() => setCollapseOpen(!collapseOpen)} style={{ cursor: 'pointer' }}>
+                <h5 className="mb-0">
+                  <FontAwesomeIcon icon={faNewspaper} /> Click Here
+                </h5>
+              </CardHeader>
+              <Collapse isOpen={collapseOpen}>
+                <CardBody>
+                  <Row className="mt-4">
+                    <Col md="6">
+                      <Card className="mb-4">
+                        <CardBody>
+                          <CardTitle tag="h5">
+                            <FontAwesomeIcon icon={faNewspaper} /> New Feature Release
+                          </CardTitle>
+                          <CardText>We have just released a new feature that will help you manage your customers even better!</CardText>
+                        </CardBody>
+                      </Card>
+                    </Col>
+                    <Col md="6">
+                      <Card className="mb-4">
+                        <CardBody>
+                          <CardTitle tag="h5">
+                            <FontAwesomeIcon icon={faNewspaper} /> Upcoming Webinar
+                          </CardTitle>
+                          <CardText>
+                            Join our upcoming webinar to learn about the latest trends in customer relationship management.
+                          </CardText>
+                        </CardBody>
+                      </Card>
+                    </Col>
+                  </Row>
+                </CardBody>
+              </Collapse>
+            </AccordionCard>
+          </Container>
+          {/* New Image Section */}
+          <div className="new-image-container mt-4">
+            <img src="content/images/crm_banner.png" alt="New Image" className="bannerimage" />
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

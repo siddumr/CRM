@@ -1,10 +1,204 @@
 /* ==========================================================================
 Main page styles
 ========================================================================== */
+.bannerimage {
+  height: 400px;
+  width: 1400px;
+  border-radius: 4500px;
+}
+.cardimage {
+  height: 270px;
+  width: 270px;
+}
+
+.ourservice {
+  font-size: larger;
+}
+
 .hipster {
   display: inline-block;
   width: 100%;
   height: 497px;
   background: url('/content/images/jhipster_family_member_2.svg') no-repeat center top;
   background-size: contain;
+}
+
+.img-fluid {
+  border-radius: 20px;
+  height: 440px;
+  width: 1000px;
+}
+
+.crm-container {
+  margin-top: 50px;
+  padding: 20px;
+
+  .text-center {
+    margin-bottom: 2rem;
+  }
+
+  h1.display-4 {
+    font-weight: 700;
+    color: #343a40;
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    color: #6c757d;
+  }
+
+  .crm-dashboard-container {
+    margin-top: 2rem;
+  }
+
+  .card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition:
+      transform 0.3s,
+      box-shadow 0.3s;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: orange;
+
+      .fa-icon {
+        margin-right: 0.5rem;
+      }
+    }
+
+    .card-text {
+      font-size: 1rem;
+      color: #6c757d;
+    }
+
+    .btn {
+      font-weight: 700;
+      background-color: #007bff;
+      border: none;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+
+  .slider-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    .slick-slider {
+      width: 100%;
+      max-width: 1000px; /* Adjust this as needed */
+    }
+  }
+
+  .crm-login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-top: 2rem;
+
+    .crm-login-form {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+      .form-group {
+        margin-bottom: 1.5rem;
+
+        label {
+          font-weight: 700;
+          color: #495057;
+        }
+
+        input {
+          border: 1px solid #ced4da;
+          border-radius: 0.25rem;
+          padding: 0.5rem;
+          font-size: 1rem;
+        }
+      }
+
+      .btn {
+        font-weight: 700;
+        background-color: #007bff;
+        border: none;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+
+      .alert {
+        font-size: 0.875rem;
+        color: #856404;
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  /* New Card Styles */
+  .calls-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #fff;
+    margin: 0 auto;
+    max-width: 300px; /* Adjust as needed */
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #343a40;
+      margin-bottom: 15px;
+    }
+
+    .card-body {
+      text-align: center;
+
+      .total-calls {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #007bff;
+        margin-bottom: 10px;
+      }
+
+      .progress {
+        height: 20px;
+        width: 100%;
+        background-color: #e9ecef;
+        border-radius: 10px;
+        overflow: hidden;
+
+        .progress-bar {
+          height: 100%;
+          background-color: #007bff;
+          transition: width 0.3s;
+        }
+      }
+    }
+  }
 }

@@ -1,3 +1,38 @@
 .footer {
-  height: 50px;
+  background-color: #343a40;
+  color: #ffffff;
+  padding: 50px;
+
+  .footer-section {
+    margin-bottom: 20px;
+
+    h5 {
+      margin-bottom: 30px;
+      color: orange;
+    }
+
+    p {
+      color: #adb5bd;
+      margin: 0;
+    }
+  }
+
+  .social-icons {
+    a {
+      color: #adb5bd;
+      margin-right: 10px;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #ffffff;
+      }
+    }
+  }
+
+  .text-center {
+    p {
+      margin: 0;
+      color: #adb5bd;
+    }
+  }
 }
