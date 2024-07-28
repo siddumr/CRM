@@ -1,32 +1,29 @@
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Slider from 'react-slick';
+import { Row, Col, Card, CardBody, CardTitle, CardText, Button, Collapse, CardHeader, Card as AccordionCard, Container } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUsers, faChartLine, faTasks, faEnvelope, faFileAlt, faNewspaper } from '@fortawesome/free-solid-svg-icons';
+import { useAppSelector } from 'app/config/store';
+
 import './home.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Slider from 'react-slick';
-import {
-  Row,
-  Col,
-  Card,
-  CardBody,
-  CardTitle,
-  CardText,
-  Button,
-  ListGroup,
-  ListGroupItem,
-  Collapse,
-  CardHeader,
-  Card as AccordionCard,
-  Container,
-} from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUsers, faChartLine, faTasks, faEnvelope, faFileAlt, faClock, faNewspaper, faPhone } from '@fortawesome/free-solid-svg-icons';
-
-import { useAppSelector } from 'app/config/store';
 
 export const Home = () => {
   const account = useAppSelector(state => state.authentication.account);
   const [collapseOpen, setCollapseOpen] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (account?.login) {
+      if (account.authorities?.includes('ROLE_ADMIN')) {
+        navigate('/admin');
+      } else {
+        navigate('/dashboard');
+      }
+    }
+  }, [account?.login, account?.authorities, navigate]);
 
   const sliderSettings = {
     dots: true,
@@ -38,134 +35,9 @@ export const Home = () => {
     autoplaySpeed: 3000, // 3 seconds
   };
 
-  // Sample call logs data
-  const callLogs = [
-    { time: '09:00 AM', description: 'Call with Client A' },
-    { time: '10:30 AM', description: 'Follow-up with Lead B' },
-    { time: '01:00 PM', description: 'Meeting with Team' },
-  ];
-
   return (
     <div className="crm-container">
-      {account?.login ? (
-        <div className="crm-dashboard-container">
-          <h1 className="display-4 text-center">CRM Dashboard</h1>
-          <Row className="mt-4">
-            <Col md="4">
-              <Card className="mb-4">
-                <CardBody>
-                  <CardTitle tag="h5">
-                    <FontAwesomeIcon icon={faPhone} /> Total Calls Today
-                  </CardTitle>
-                  <CardText className="text-center">
-                    <h2 style={{ color: 'blue', fontSize: '70px' }}>15</h2> {/* Replace this with a dynamic value if needed */}
-                    <ListGroup className="mt-3">
-                      {callLogs.map((log, index) => (
-                        <ListGroupItem key={index}>
-                          <strong>{log.time}</strong>: {log.description}
-                        </ListGroupItem>
-                      ))}
-                    </ListGroup>
-                  </CardText>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col md="4">
-              <Card className="mb-4">
-                <CardBody>
-                  <CardTitle tag="h5">
-                    <FontAwesomeIcon icon={faClock} /> Leads Converted
-                  </CardTitle>
-                  <CardText>Track recent customer interactions.</CardText>
-                  <img src="content/images/Leads.png" alt="Recent Activities" className="cardimage" />
-
-                  <Button color="primary" block className="mt-3">
-                    View All Process
-                  </Button>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col md="4">
-              <Card className="mb-4">
-                <CardBody>
-                  <CardTitle tag="h5">
-                    <FontAwesomeIcon icon={faChartLine} /> Sales Statistics
-                  </CardTitle>
-                  <CardText>Analyze your sales performance.</CardText>
-                  <img src="https://via.placeholder.com/150" alt="Sales Statistics" className="cardimage" />
-                  <ListGroup flush>
-                    <ListGroupItem>Today's Sales: $1000</ListGroupItem>
-                    <ListGroupItem>This Week: $5000</ListGroupItem>
-                    <ListGroupItem>This Month: $20000</ListGroupItem>
-                  </ListGroup>
-                  <Button color="primary" block className="mt-3">
-                    View Detailed Sales
-                  </Button>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-          <Row className="mt-4">
-            <Col md="4">
-              <Card className="mb-4">
-                <CardBody>
-                  <CardTitle tag="h5">
-                    <FontAwesomeIcon icon={faTasks} /> Tasks
-                  </CardTitle>
-                  <CardText>Organize and manage your tasks.</CardText>
-                  <img src="https://via.placeholder.com/150" alt="Tasks" className="cardimage" />
-                  <ListGroup flush>
-                    <ListGroupItem>Task 1: Meeting at 3 PM</ListGroupItem>
-                    <ListGroupItem>Task 2: Follow up with Client A</ListGroupItem>
-                    <ListGroupItem>Task 3: Prepare report</ListGroupItem>
-                  </ListGroup>
-                  <Button color="primary" block className="mt-3">
-                    View All Tasks
-                  </Button>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col md="4">
-              <Card className="mb-4">
-                <CardBody>
-                  <CardTitle tag="h5">
-                    <FontAwesomeIcon icon={faEnvelope} /> Messages
-                  </CardTitle>
-                  <CardText>Check your messages.</CardText>
-                  <img src="https://via.placeholder.com/150" alt="Messages" className="cardimage" />
-                  <ListGroup flush>
-                    <ListGroupItem>Message from Client B</ListGroupItem>
-                    <ListGroupItem>Follow-up on Proposal</ListGroupItem>
-                    <ListGroupItem>Team Meeting Notes</ListGroupItem>
-                  </ListGroup>
-                  <Button color="primary" block className="mt-3">
-                    View All Messages
-                  </Button>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col md="4">
-              <Card className="mb-4">
-                <CardBody>
-                  <CardTitle tag="h5">
-                    <FontAwesomeIcon icon={faFileAlt} /> Reports
-                  </CardTitle>
-                  <CardText>Generate and view reports.</CardText>
-                  <img src="https://via.placeholder.com/150" alt="Reports" className="cardimage" />
-                  <ListGroup flush>
-                    <ListGroupItem>Monthly Sales Report</ListGroupItem>
-                    <ListGroupItem>Customer Feedback Report</ListGroupItem>
-                    <ListGroupItem>Performance Analysis</ListGroupItem>
-                  </ListGroup>
-                  <Button color="primary" block className="mt-3">
-                    View All Reports
-                  </Button>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-        </div>
-      ) : (
+      {!account?.login ? (
         <div className="text-center">
           <h1 className="display-4">Welcome to Our CRM</h1>
           <p className="lead">Manage your customer relationships effortlessly with our CRM system.</p>
@@ -356,6 +228,11 @@ export const Home = () => {
           <div className="new-image-container mt-4">
             <img src="content/images/crm_banner.png" alt="New Image" className="bannerimage" />
           </div>
+        </div>
+      ) : (
+        <div className="crm-dashboard-container">
+          <h1 className="display-4 text-center">CRM Dashboard</h1>
+          <Row className="mt-4">{/* CRM Dashboard Cards */}</Row>
         </div>
       )}
     </div>
