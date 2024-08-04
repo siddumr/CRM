@@ -1,6 +1,6 @@
 import './header.scss';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Storage } from 'react-jhipster';
 import { Navbar, Nav, NavbarToggler, Collapse } from 'reactstrap';
 import LoadingBar from 'react-redux-loading-bar';
@@ -21,6 +21,8 @@ export interface IHeaderProps {
 
 const Header = (props: IHeaderProps) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [navbarVisible, setNavbarVisible] = useState(true);
+  const [lastScrollTop, setLastScrollTop] = useState(0);
 
   const dispatch = useAppDispatch();
 
@@ -32,12 +34,29 @@ const Header = (props: IHeaderProps) => {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (currentScrollTop > lastScrollTop) {
+        setNavbarVisible(false); // Scroll down, hide navbar
+      } else {
+        setNavbarVisible(true); // Scroll up, show navbar
+      }
+      setLastScrollTop(currentScrollTop <= 0 ? 0 : currentScrollTop); // For Mobile or negative scrolling
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollTop]);
+
   /* jhipster-needle-add-element-to-menu - JHipster will add new menu items here */
 
   return (
     <div id="app-header">
       <LoadingBar className="loading-bar" />
-      <Navbar data-cy="navbar" dark expand="md" fixed="top" className="bg-dark">
+      <Navbar data-cy="navbar" dark expand="md" fixed="top" className={`nav ${navbarVisible ? '' : 'navbar-hidden'}`}>
         <NavbarToggler aria-label="Menu" onClick={toggleMenu} />
         <Brand />
         <Collapse isOpen={menuOpen} navbar>

@@ -14,9 +14,6 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Nav,
-  NavItem,
-  NavLink,
   TabContent,
   TabPane,
 } from 'reactstrap';
@@ -24,12 +21,40 @@ import classnames from 'classnames';
 import './dashboard.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartLine, faTasks, faUsers, faCog } from '@fortawesome/free-solid-svg-icons';
+import PieChart from './PieChart';
+import LineChart from './LineChart';
 
-const Dashboard = () => {
-  const [leads, setLeads] = useState([]);
+interface Lead {
+  id: number;
+  first_name: string;
+  last_name: string;
+  company: string;
+  website: string;
+  email: string;
+  lead_source: string;
+  lead_status: string;
+  title?: string;
+  fax?: string;
+  industry?: string;
+  no_of_emp?: number;
+  annual_revenue?: string;
+  rating?: string;
+  social_media?: string;
+  media_handle_id?: string;
+  street?: string;
+  city?: string;
+  state?: string;
+  zipcode?: string;
+  country?: string;
+  description?: string;
+  created_at: string;
+}
+
+const NewDashboard: React.FC = () => {
+  const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [selectedLead, setSelectedLead] = useState(null);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [modal, setModal] = useState(false);
   const [activeTab, setActiveTab] = useState('1');
 
@@ -52,12 +77,12 @@ const Dashboard = () => {
     fetchLeads();
   }, []);
 
-  const toggleModal = lead => {
+  const toggleModal = (lead: Lead | null) => {
     setSelectedLead(lead);
     setModal(!modal);
   };
 
-  const closeLead = async id => {
+  const closeLead = async (id: number) => {
     try {
       await axios.put(`/api/leads/${id}`, { lead_status: 'Closed' });
       const updatedLeads = leads.map(lead => (lead.id === id ? { ...lead, lead_status: 'Closed' } : lead));
@@ -67,59 +92,29 @@ const Dashboard = () => {
     }
   };
 
-  const toggleTab = tab => {
-    if (activeTab !== tab) setActiveTab(tab);
+  const changeTab = (tab: string) => {
+    setActiveTab(tab);
   };
 
   return (
-    <div className="dashboard-container">
-      <div className="sidebar">
+    <div className="new-dashboard-container">
+      <div className="new-sidebar">
         <h2>CRM Dashboard</h2>
-        <Nav tabs>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: activeTab === '1' })}
-              onClick={() => {
-                toggleTab('1');
-              }}
-            >
-              <FontAwesomeIcon icon={faChartLine} /> Dashboard
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: activeTab === '2' })}
-              onClick={() => {
-                toggleTab('2');
-              }}
-            >
-              <FontAwesomeIcon icon={faTasks} /> Leads
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: activeTab === '3' })}
-              onClick={() => {
-                toggleTab('3');
-              }}
-            >
-              <FontAwesomeIcon icon={faUsers} /> Services
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: activeTab === '4' })}
-              onClick={() => {
-                toggleTab('4');
-              }}
-            >
-              <FontAwesomeIcon icon={faCog} /> Settings
-            </NavLink>
-          </NavItem>
-        </Nav>
+        <Button className={classnames({ active: activeTab === '1' })} onClick={() => changeTab('1')}>
+          <FontAwesomeIcon icon={faChartLine} /> Dashboard
+        </Button>
+        <Button className={classnames({ active: activeTab === '2' })} onClick={() => changeTab('2')}>
+          <FontAwesomeIcon icon={faTasks} /> Leads
+        </Button>
+        <Button className={classnames({ active: activeTab === '3' })} onClick={() => changeTab('3')}>
+          <FontAwesomeIcon icon={faUsers} /> Services
+        </Button>
+        <Button className={classnames({ active: activeTab === '4' })} onClick={() => changeTab('4')}>
+          <FontAwesomeIcon icon={faCog} /> Settings
+        </Button>
       </div>
 
-      <div className="content">
+      <div className="new-content">
         <TabContent activeTab={activeTab}>
           <TabPane tabId="1">
             <h1>User Dashboard</h1>
@@ -151,13 +146,22 @@ const Dashboard = () => {
                 </Card>
               </Col>
             </Row>
+
+            <Row>
+              <Col md="6">
+                <PieChart data={{ totalLeads, newLeadsCount, closedLeadsCount }} size={{ width: 300, height: 300 }} />
+              </Col>
+              <Col md="6">
+                <LineChart data={leads} size={{ width: 400, height: 300 }} />
+              </Col>
+            </Row>
           </TabPane>
           <TabPane tabId="2">
             <h2>Leads</h2>
             {loading && <Spinner color="primary" />}
             {error && <Alert color="danger">{error}</Alert>}
             {leads.length > 0 ? (
-              <Row className="lead-list">
+              <Row className="new-lead-list">
                 {leads.map(lead => (
                   <Col md="6" lg="4" key={lead.id} className="mb-4">
                     <Card>
@@ -190,8 +194,8 @@ const Dashboard = () => {
             )}
 
             {selectedLead && (
-              <Modal isOpen={modal} toggle={toggleModal}>
-                <ModalHeader toggle={toggleModal}>Lead Details</ModalHeader>
+              <Modal isOpen={modal} toggle={() => toggleModal(null)}>
+                <ModalHeader toggle={() => toggleModal(null)}>Lead Details</ModalHeader>
                 <ModalBody>
                   <p>
                     <strong>Name:</strong> {selectedLead.first_name} {selectedLead.last_name}
@@ -212,16 +216,16 @@ const Dashboard = () => {
                     <strong>Website:</strong> {selectedLead.website}
                   </p>
                   <p>
-                    <strong>Source:</strong> {selectedLead.lead_source}
+                    <strong>Lead Source:</strong> {selectedLead.lead_source}
                   </p>
                   <p>
-                    <strong>Status:</strong> {selectedLead.lead_status}
+                    <strong>Lead Status:</strong> {selectedLead.lead_status}
                   </p>
                   <p>
                     <strong>Industry:</strong> {selectedLead.industry}
                   </p>
                   <p>
-                    <strong>Employees:</strong> {selectedLead.no_of_emp}
+                    <strong>Number of Employees:</strong> {selectedLead.no_of_emp}
                   </p>
                   <p>
                     <strong>Annual Revenue:</strong> {selectedLead.annual_revenue}
@@ -244,7 +248,7 @@ const Dashboard = () => {
                   </p>
                 </ModalBody>
                 <ModalFooter>
-                  <Button color="secondary" onClick={toggleModal}>
+                  <Button color="secondary" onClick={() => toggleModal(null)}>
                     Close
                   </Button>
                   <Button color="danger" onClick={() => closeLead(selectedLead.id)}>
@@ -268,4 +272,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default NewDashboard;

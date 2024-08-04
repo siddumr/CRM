@@ -9,6 +9,9 @@ import { useAppSelector } from 'app/config/store';
 import './home.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import CommentCards from './CommentCards';
+import PricingComponent from './PricingComponent';
+import Land from './Land';
 
 export const Home = () => {
   const account = useAppSelector(state => state.authentication.account);
@@ -45,7 +48,7 @@ export const Home = () => {
             <Slider {...sliderSettings}>
               <div>
                 <img
-                  src="https://img.freepik.com/free-photo/3d-cartoon-scene-depicting-variety-people-multitasking_23-2151294503.jpg?t=st=1722147583~exp=1722151183~hmac=91e8d9a9fe71a4e55a67344f80d8f7b0ecd9ec137e40452a9e6e2e7a6a294484&w=996"
+                  src="https://img.freepik.com/premium-photo/notebook-with-toolls-notes-about-crm_132358-3238.jpg?ga=GA1.1.688353063.1686149813&semt=ais_hybrid"
                   alt="Slide 1"
                   className="img-fluid"
                 />
@@ -59,7 +62,7 @@ export const Home = () => {
               </div>
               <div>
                 <img
-                  src="https://img.freepik.com/free-photo/standard-quality-control-concept-m_23-2150041867.jpg?ga=GA1.1.688353063.1686149813&semt=sph"
+                  src="https://img.freepik.com/premium-photo/man-drawing-colorful-light-bulb_1077205-4750.jpg?ga=GA1.1.688353063.1686149813&semt=ais_hybrid"
                   alt="Slide 3"
                   className="img-fluid"
                 />
@@ -67,17 +70,7 @@ export const Home = () => {
             </Slider>
           </div>
           {/* Our Services Section */}
-          <div className="our-services-container mt-5">
-            <h2 className="text-center mb-4">Our Services</h2>
-            <p className="ourservice">
-              Discover our wide range of services designed to help you manage customer relationships, analyze sales performance, and more.
-              Our CRM system offers a comprehensive solution to meet your business needs. From intuitive customer management tools to
-              advanced sales analytics, we provide everything you need to grow your business. Our task management features ensure that you
-              stay organized and on top of your priorities. With integrated messaging and detailed reporting capabilities, our CRM helps you
-              communicate effectively and make data-driven decisions. Experience the power of seamless customer relationship management with
-              our robust and user-friendly system.
-            </p>
-          </div>
+          <h1 style={{ fontFamily: '-moz-initial', color: 'black', marginTop: '50px' }}>Our Services</h1>
           <Row className="mt-4">
             <Col md="4">
               <Card className="mb-4">
@@ -157,15 +150,26 @@ export const Home = () => {
               </Card>
             </Col>
           </Row>
+
+          <div className="our-services-container mt-5">
+            <p className="ourservice">
+              Discover our wide range of services designed to help you manage customer relationships, analyze sales performance, and more.
+              Our CRM system offers a comprehensive solution to meet your business needs. From intuitive customer management tools to
+              advanced sales analytics, we provide everything you need to grow your business. Our task management features ensure that you
+              stay organized and on top of your priorities. With integrated messaging and detailed reporting capabilities, our CRM helps you
+              communicate effectively and make data-driven decisions. Experience the power of seamless customer relationship management with
+              our robust and user-friendly system.
+            </p>
+          </div>
           <Row className="mt-4">
             <Col>
               <Card className="section-card full-width-card">
                 <CardBody>
                   <CardTitle tag="h5">Explore More</CardTitle>
                   <p style={{ color: 'black' }}>
-                    Discover new features and expand your possibilities with our latest updates. <br></br>
-                    Whether you are looking to enhance your skills or explore new services, we have something for everyone. <br></br>Dive
-                    into our latest offerings and unlock new potential.
+                    Discover new features and expand your possibilities with our latest updates. <br />
+                    Whether you are looking to enhance your skills or explore new services, we have something for everyone. <br />
+                    Dive into our latest offerings and unlock new potential.
                   </p>
                   <Button color="primary" size="lg" className="mr-2">
                     <Link to="/login" style={{ color: 'white', textDecoration: 'none' }}>
@@ -173,7 +177,7 @@ export const Home = () => {
                     </Link>
                   </Button>
                   <Button color="secondary" size="lg">
-                    <Link to="/pricing" style={{ color: 'white', textDecoration: 'none' }}>
+                    <Link to="/price" style={{ color: 'white', textDecoration: 'none' }}>
                       View Pricing
                     </Link>
                   </Button>
@@ -181,6 +185,21 @@ export const Home = () => {
               </Card>
             </Col>
           </Row>
+          {/* Video Section */}
+          {/* <div className="video-container">
+            <video controls autoPlay loop muted className='video'>
+              <source src="https://videos.pexels.com/video-files/7947465/7947465-sd_640_360_30fps.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div> */}
+
+          <div>
+            <Land></Land>
+          </div>
+          <div>
+            <h1 style={{ marginTop: '90px', fontSize: '50px', color: 'black', fontFamily: '-moz-initial' }}>Our Customers</h1>
+            <CommentCards />
+          </div>
         </div>
       ) : (
         <div className="text-center">

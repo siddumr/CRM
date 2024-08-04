@@ -1,12 +1,12 @@
-.dashboard-container {
+.new-dashboard-container {
   display: flex;
   min-height: 100vh;
   background-color: #f0f4f8;
   font-family: 'Arial', sans-serif;
 
-  .sidebar {
+  .new-sidebar {
     width: 250px;
-    background: linear-gradient(45deg, #1abc9c, #16a085);
+    background: linear-gradient(135deg, #1e1c19 0%, #1c1316 100%);
     color: #ecf0f1;
     padding: 20px;
     position: fixed;
@@ -15,6 +15,9 @@
     bottom: 0;
     border-radius: 8px 0 0 8px;
     transition: width 0.3s ease;
+    overflow-y: auto; /* Make the sidebar scrollable */
+    height: 100vh; /* Ensure the sidebar takes up the full height of the viewport */
+    z-index: 1000; /* Ensure the sidebar stays on top of other content */
 
     &:hover {
       width: 280px;
@@ -28,38 +31,29 @@
       font-weight: bold;
     }
 
-    .nav-tabs {
-      border-bottom: none;
+    button {
+      color: #ecf0f1;
+      border: none;
+      padding: 15px;
+      font-size: 1.1rem;
+      display: block;
+      width: 100%;
+      background: transparent;
+      margin-bottom: 5px;
+      border-radius: 4px;
+      transition:
+        background 0.3s,
+        transform 0.3s;
 
-      .nav-item {
-        width: 100%;
-        text-align: center;
-
-        .nav-link {
-          color: #ecf0f1;
-          border: none;
-          padding: 15px;
-          font-size: 1.1rem;
-          display: block;
-          width: 100%;
-          background: transparent;
-          margin-bottom: 5px;
-          border-radius: 4px;
-          transition:
-            background 0.3s,
-            transform 0.3s;
-
-          &:hover,
-          &.active {
-            background: #148f77;
-            transform: translateX(5px);
-          }
-        }
+      &:hover,
+      &.active {
+        background: #ee8206;
+        transform: translateX(5px);
       }
     }
   }
 
-  .content {
+  .new-content {
     margin-left: 270px;
     padding: 20px;
     flex-grow: 1;
@@ -72,7 +66,7 @@
     }
   }
 
-  .lead-list .card {
+  .new-lead-list .card {
     margin-bottom: 20px;
   }
 
