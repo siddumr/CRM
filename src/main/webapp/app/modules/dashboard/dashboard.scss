@@ -1,42 +1,133 @@
 .dashboard-container {
-  padding: 20px;
-  height: 92vh;
-  background-color: #f9f9f9;
+  display: flex;
+  min-height: 100vh;
+  background-color: #f0f4f8;
+  font-family: 'Arial', sans-serif;
 
-  h1 {
+  .sidebar {
+    width: 250px;
+    background: linear-gradient(45deg, #1abc9c, #16a085);
+    color: #ecf0f1;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    border-radius: 8px 0 0 8px;
+    transition: width 0.3s ease;
+
+    &:hover {
+      width: 280px;
+    }
+
+    h2 {
+      color: #ecf0f1;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .nav-tabs {
+      border-bottom: none;
+
+      .nav-item {
+        width: 100%;
+        text-align: center;
+
+        .nav-link {
+          color: #ecf0f1;
+          border: none;
+          padding: 15px;
+          font-size: 1.1rem;
+          display: block;
+          width: 100%;
+          background: transparent;
+          margin-bottom: 5px;
+          border-radius: 4px;
+          transition:
+            background 0.3s,
+            transform 0.3s;
+
+          &:hover,
+          &.active {
+            background: #148f77;
+            transform: translateX(5px);
+          }
+        }
+      }
+    }
+  }
+
+  .content {
+    margin-left: 270px;
+    padding: 20px;
+    flex-grow: 1;
+    background: #ecf0f1;
+    border-radius: 8px;
+    transition: margin-left 0.3s ease;
+
+    @media (max-width: 768px) {
+      margin-left: 0;
+    }
+  }
+
+  .lead-list .card {
     margin-bottom: 20px;
   }
 
-  .lead-list {
-    margin-top: 20px;
+  h1,
+  h2 {
+    color: #34495e;
+    transition: color 0.3s ease;
+  }
+
+  p {
+    color: #333;
+    font-size: 1rem;
+  }
+
+  .modal-body {
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 8px;
   }
 
   .card {
     background-color: #fff;
     border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition:
+      transform 0.3s,
+      box-shadow 0.3s;
 
     &:hover {
-      transform: scale(1.02);
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     }
 
     .card-body {
-      padding: 15px;
+      padding: 20px;
 
       .card-title {
         margin-bottom: 15px;
-        font-size: 1.25rem;
-        font-weight: 600;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #34495e;
       }
 
       .card-text {
         margin-bottom: 10px;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #555;
 
         strong {
           display: inline-block;
-          width: 120px;
+          width: 150px;
+          font-weight: 600;
+          color: #333;
         }
       }
     }
@@ -44,69 +135,30 @@
 
   .spinner-border {
     margin-top: 20px;
+    color: #34495e;
   }
 
   .alert {
     margin-top: 20px;
+    padding: 15px;
+    border-radius: 4px;
+    background-color: #e74c3c;
+    color: #fff;
+    font-weight: 600;
   }
-}
 
-.card-title {
-  color: black;
-}
+  .progress-bar {
+    margin: 20px 0;
+    height: 20px;
+    background-color: #d3d3d3;
+    border-radius: 4px;
+    position: relative;
 
-h1 {
-  color: black;
-}
-p {
-  color: black;
-}
-.modal-body {
-  background-color: white;
-}
-.sidebar {
-  width: 250px;
-  margin-bottom: -88vh;
-  background: #2c3e50;
-  color: #ecf0f1;
-  padding: 15px;
-  position: sticky;
-  height: 80vh;
-}
-
-.sidebar h2 {
-  color: #ecf0f1;
-  text-align: center;
-}
-
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.sidebar ul li {
-  padding: 10px 0;
-  text-align: center;
-}
-
-.sidebar ul li a {
-  color: #ecf0f1;
-  text-decoration: none;
-  display: block;
-}
-
-.sidebar ul li a:hover {
-  background: #34495e;
-  border-radius: 4px;
-}
-
-.content {
-  margin-left: 250px;
-  padding: 20px;
-  flex-grow: 1;
-  background: #ecf0f1;
-}
-
-.lead-list .card {
-  margin-bottom: 20px;
+    .progress-bar-fill {
+      height: 100%;
+      background-color: #1abc9c;
+      border-radius: 4px;
+      transition: width 0.3s;
+    }
+  }
 }

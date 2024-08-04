@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
-import { Row, Col, Card, CardBody, CardTitle, CardText, Button, Collapse, CardHeader, Card as AccordionCard, Container } from 'reactstrap';
+import { Row, Col, Card, CardBody, CardTitle, CardText, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUsers, faChartLine, faTasks, faEnvelope, faFileAlt, faNewspaper } from '@fortawesome/free-solid-svg-icons';
+import { faUsers, faChartLine, faTasks, faEnvelope, faFileAlt } from '@fortawesome/free-solid-svg-icons';
 import { useAppSelector } from 'app/config/store';
 
 import './home.scss';
@@ -28,11 +28,11 @@ export const Home = () => {
   const sliderSettings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 800,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000, // 3 seconds
+    autoplaySpeed: 2000, // 2 seconds
   };
 
   return (
@@ -158,81 +158,34 @@ export const Home = () => {
             </Col>
           </Row>
           <Row className="mt-4">
-            <Col md="6">
-              <h2>Testimonials</h2>
-              <Card className="mb-4">
+            <Col>
+              <Card className="section-card full-width-card">
                 <CardBody>
-                  <CardText>"This CRM has transformed the way we manage our customer relationships!" - A Satisfied User</CardText>
-                </CardBody>
-              </Card>
-              <Card className="mb-4">
-                <CardBody>
-                  <CardText>"Our sales have increased by 50% since we started using this CRM." - Another Happy Customer</CardText>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col md="6">
-              <h2>Get Started</h2>
-              <Card className="mb-4">
-                <CardBody>
-                  <CardText>Sign up today and take your business to the next level with our powerful CRM tools.</CardText>
-                  <Button color="primary" size="lg" block>
+                  <CardTitle tag="h5">Explore More</CardTitle>
+                  <p style={{ color: 'black' }}>
+                    Discover new features and expand your possibilities with our latest updates. <br></br>
+                    Whether you are looking to enhance your skills or explore new services, we have something for everyone. <br></br>Dive
+                    into our latest offerings and unlock new potential.
+                  </p>
+                  <Button color="primary" size="lg" className="mr-2">
                     <Link to="/login" style={{ color: 'white', textDecoration: 'none' }}>
                       View Demo
+                    </Link>
+                  </Button>
+                  <Button color="secondary" size="lg">
+                    <Link to="/pricing" style={{ color: 'white', textDecoration: 'none' }}>
+                      View Pricing
                     </Link>
                   </Button>
                 </CardBody>
               </Card>
             </Col>
           </Row>
-          {/* Latest News Accordion */}
-          <Container className="latest-news-container mt-4">
-            <h2 className="text-center">Latest News</h2>
-            <AccordionCard>
-              <CardHeader onClick={() => setCollapseOpen(!collapseOpen)} style={{ cursor: 'pointer' }}>
-                <h5 className="mb-0">
-                  <FontAwesomeIcon icon={faNewspaper} /> Click Here
-                </h5>
-              </CardHeader>
-              <Collapse isOpen={collapseOpen}>
-                <CardBody>
-                  <Row className="mt-4">
-                    <Col md="6">
-                      <Card className="mb-4">
-                        <CardBody>
-                          <CardTitle tag="h5">
-                            <FontAwesomeIcon icon={faNewspaper} /> New Feature Release
-                          </CardTitle>
-                          <CardText>We have just released a new feature that will help you manage your customers even better!</CardText>
-                        </CardBody>
-                      </Card>
-                    </Col>
-                    <Col md="6">
-                      <Card className="mb-4">
-                        <CardBody>
-                          <CardTitle tag="h5">
-                            <FontAwesomeIcon icon={faNewspaper} /> Upcoming Webinar
-                          </CardTitle>
-                          <CardText>
-                            Join our upcoming webinar to learn about the latest trends in customer relationship management.
-                          </CardText>
-                        </CardBody>
-                      </Card>
-                    </Col>
-                  </Row>
-                </CardBody>
-              </Collapse>
-            </AccordionCard>
-          </Container>
-          {/* New Image Section */}
-          <div className="new-image-container mt-4">
-            <img src="content/images/crm_banner.png" alt="New Image" className="bannerimage" />
-          </div>
         </div>
       ) : (
-        <div className="crm-dashboard-container">
-          <h1 className="display-4 text-center">CRM Dashboard</h1>
-          <Row className="mt-4">{/* CRM Dashboard Cards */}</Row>
+        <div className="text-center">
+          <h1 className="display-4">Welcome Back!</h1>
+          <p className="lead">Manage your CRM dashboard from here.</p>
         </div>
       )}
     </div>

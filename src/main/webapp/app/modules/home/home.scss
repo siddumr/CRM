@@ -6,6 +6,7 @@ Main page styles
   width: 1400px;
   border-radius: 4500px;
 }
+
 .cardimage {
   height: 270px;
   width: 270px;
@@ -40,6 +41,39 @@ Main page styles
   h1.display-4 {
     font-weight: 700;
     color: #343a40;
+    font-size: 3rem;
+    overflow: hidden; /* Ensures the text doesn't overflow during animation */
+    white-space: nowrap;
+    animation:
+      typewriter 4s steps(40, end),
+      bounce 2s ease-in-out infinite;
+    border-right: 0.15em solid orange; /* Creates the typewriter cursor effect */
+    padding-right: 0.1em; /* Adjust the space between the text and the cursor */
+  }
+
+  @keyframes typewriter {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-30px);
+    }
+    60% {
+      transform: translateY(-15px);
+    }
   }
 
   .lead {
@@ -56,12 +90,14 @@ Main page styles
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition:
-      transform 0.3s,
-      box-shadow 0.3s;
+      transform 0.3s ease-in-out,
+      box-shadow 0.3s ease-in-out,
+      background-color 0.3s ease-in-out;
 
     &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      transform: scale(1.05);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+      background-color: #f8f9fa;
     }
 
     .card-title {
@@ -70,6 +106,7 @@ Main page styles
       font-weight: 700;
       font-size: 1.25rem;
       color: orange;
+      transition: color 0.3s ease-in-out;
 
       .fa-icon {
         margin-right: 0.5rem;
@@ -79,19 +116,28 @@ Main page styles
     .card-text {
       font-size: 1rem;
       color: #6c757d;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: #343a40;
+      }
     }
 
     .btn {
       font-weight: 700;
       background-color: #007bff;
       border: none;
-      transition: background-color 0.3s;
+      transition:
+        background-color 0.3s ease-in-out,
+        transform 0.3s ease-in-out;
 
       &:hover {
         background-color: #0056b3;
+        transform: scale(1.05);
       }
     }
   }
+
   .slider-container {
     display: flex;
     justify-content: center; /* Center horizontally */
@@ -108,7 +154,15 @@ Main page styles
   .slick-slide img {
     border-radius: 20px;
     width: 100%; /* Ensure images fit the slider container */
-    height: auto; /* Maintain aspect ratio */
+    height: 500px; /* Maintain aspect ratio */
+    transition:
+      transform 0.3s ease-in-out,
+      opacity 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
   }
 
   .crm-login-container {
@@ -144,7 +198,7 @@ Main page styles
         font-weight: 700;
         background-color: #007bff;
         border: none;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s ease-in-out;
 
         &:hover {
           background-color: #0056b3;
@@ -174,12 +228,20 @@ Main page styles
     background-color: #fff;
     margin: 0 auto;
     max-width: 300px; /* Adjust as needed */
+    transition:
+      transform 0.3s ease-in-out,
+      box-shadow 0.3s ease-in-out;
 
     .card-title {
       font-size: 1.5rem;
       font-weight: 700;
       color: #343a40;
       margin-bottom: 15px;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: #007bff;
+      }
     }
 
     .card-body {
@@ -190,6 +252,11 @@ Main page styles
         font-weight: 700;
         color: #007bff;
         margin-bottom: 10px;
+        transition: color 0.3s ease-in-out;
+
+        &:hover {
+          color: #0056b3;
+        }
       }
 
       .progress {
@@ -198,13 +265,70 @@ Main page styles
         background-color: #e9ecef;
         border-radius: 10px;
         overflow: hidden;
+        transition: background-color 0.3s ease-in-out;
 
         .progress-bar {
           height: 100%;
           background-color: #007bff;
-          transition: width 0.3s;
+          transition:
+            width 0.3s ease-in-out,
+            background-color 0.3s ease-in-out;
+
+          &:hover {
+            background-color: #0056b3;
+          }
         }
       }
+    }
+  }
+
+  /* Ensure the Explore More card spans full width and has no hover effects */
+  .full-width-card {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 40px 20px; /* Adjust padding as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_l93LFA4O9jmj-X7gv5TA6E-C1X6ft4ExQTC1wGTaRIXpbDo9uoVN2SrH9A&s')
+      no-repeat center center; /* Add background image URL */
+    background-size: cover; /* Ensure the image covers the entire card */
+    position: relative; /* Ensure overlay can be positioned correctly */
+  }
+
+  .full-width-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    border-radius: 10px; /* Match the card's border radius */
+  }
+
+  .full-width-card .card-title,
+  .full-width-card .card-text,
+  .full-width-card .btn {
+    position: relative; /* Ensure content is above the overlay */
+    z-index: 1;
+    color: #fff; /* White text for better readability */
+  }
+
+  .full-width-card .card-title {
+    font-size: 2rem; /* Adjust font size as needed */
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+
+  .full-width-card .btn {
+    margin: 0.5rem;
+    background-color: #007bff; /* Button background color */
+    /* No hover effect on buttons */
+    transition: none !important;
+
+    &:hover {
+      background-color: #0056b3;
     }
   }
 }
