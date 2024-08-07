@@ -34,7 +34,10 @@ const Land: React.FC = () => {
             <h1 className="display-5">
               How can we help <br></br>grow your business?
             </h1>
-            <p>This is how the image looks like before applying a duotone effect.</p>
+            <p style={{ color: 'black', marginTop: '30px' }}>
+              ServoCRM is the world’s most trusted customer relationship management (CRM) platform. We help your marketing, sales, commerce,
+              service and IT teams work as one from anywhere — so you can keep your customers happy everywhere.
+            </p>
           </div>
           <div></div>
           <img

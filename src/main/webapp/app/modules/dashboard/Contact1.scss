@@ -1,0 +1,84 @@
+/* Contacts.css */
+
+.contacts-container {
+  padding: 20px;
+  background-color: #f8f9fa; /* Light background for better contrast */
+  border-radius: 8px; /* Rounded corners for the container */
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #343a40;
+  font-family: 'Arial', sans-serif;
+  font-weight: 600; /* Slightly bolder text */
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  border-collapse: collapse;
+  border-radius: 8px; /* Rounded corners for the table */
+  overflow: hidden; /* Ensures rounded corners are visible */
+  transition: all 0.3s ease-in-out;
+  background-color: #fff; /* White background for table rows */
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+  background: linear-gradient(90deg, #f3a413, #f75b01); /* Gradient background */
+  color: #fff;
+  text-align: center; /* Center align text */
+  font-weight: 700; /* Bold headers */
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+  transition:
+    background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out;
+}
+
+.table tbody tr {
+  transition:
+    background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out;
+}
+
+.table tbody tr:hover {
+  background-color: #e9ecef; /* Subtle gray background on hover */
+  color: #495057; /* Darker text color on hover */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect on hover */
+}
+
+.table tbody td {
+  text-align: center; /* Center align text in cells */
+}
+
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive > .table-bordered {
+  border: 0;
+}
+
+/* Add some padding and margin for small screens */
+@media (max-width: 768px) {
+  .contacts-container {
+    padding: 10px;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.5rem;
+  }
+}

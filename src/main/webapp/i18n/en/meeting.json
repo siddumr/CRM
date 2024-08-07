@@ -1,0 +1,29 @@
+{
+  "crmApp": {
+    "meeting": {
+      "home": {
+        "title": "Meetings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Meeting",
+        "createOrEditLabel": "Create or edit a Meeting",
+        "notFound": "No Meetings found"
+      },
+      "created": "A new Meeting is created with identifier {{ param }}",
+      "updated": "A Meeting is updated with identifier {{ param }}",
+      "deleted": "A Meeting is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Meeting {{ id }}?"
+      },
+      "detail": {
+        "title": "Meeting"
+      },
+      "id": "ID",
+      "title": "Title",
+      "from": "From",
+      "to": "To",
+      "realated_to": "Realated To",
+      "contact_name": "Contact Name",
+      "host": "Host"
+    }
+  }
+}

@@ -12,6 +12,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import CommentCards from './CommentCards';
 import PricingComponent from './PricingComponent';
 import Land from './Land';
+import Footer from 'app/shared/layout/footer/footer';
 
 export const Home = () => {
   const account = useAppSelector(state => state.authentication.account);
@@ -200,6 +201,7 @@ export const Home = () => {
             <h1 style={{ marginTop: '90px', fontSize: '50px', color: 'black', fontFamily: '-moz-initial' }}>Our Customers</h1>
             <CommentCards />
           </div>
+          <Footer />
         </div>
       ) : (
         <div className="text-center">

@@ -1,0 +1,109 @@
+.lead-list {
+  padding: 20px;
+}
+
+.lead-list .card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease,
+    background-color 0.3s ease;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.lead-list .card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-10px) scale(1.02);
+  background-color: #f9f9f9;
+}
+
+.lead-list .card-body {
+  padding: 20px;
+  transition: color 0.3s ease;
+}
+
+.lead-list .card-body:hover {
+  color: #007bff;
+}
+
+.lead-list .card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.lead-list .card-text {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.lead-list .card-text strong {
+  color: #007bff;
+}
+
+.lead-list .btn-primary {
+  background-color: #007bff;
+  border: none;
+  font-weight: 500;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.lead-list .btn-primary:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.lead-list .modal-content {
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.lead-list .modal-header {
+  border-bottom: none;
+}
+
+.lead-list .modal-body {
+  padding: 20px;
+  font-size: 14px;
+  color: #333;
+}
+
+.lead-list .modal-footer {
+  border-top: none;
+}
+
+.lead-list .btn-danger {
+  background-color: #dc3545;
+  border: none;
+  font-weight: 500;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.lead-list .btn-danger:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+.filter-create-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .filter-input {
+    flex: 1;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+
+  .create-button {
+    white-space: nowrap;
+  }
+}

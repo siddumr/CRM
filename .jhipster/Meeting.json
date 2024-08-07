@@ -1,0 +1,40 @@
+{
+  "annotations": {
+    "changelogDate": "20240807053833"
+  },
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "from",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "to",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "realated_to",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contact_name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "host",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Meeting",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

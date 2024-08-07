@@ -27,10 +27,10 @@ a {
   box-sizing: border-box;
   .view-container {
     width: 100%;
-    height: calc(100% - 40px);
+    height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 1rem;
+    margin-top: 20px;
     .card {
       padding: 1rem;
     }

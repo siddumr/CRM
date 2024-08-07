@@ -1,0 +1,38 @@
+{
+  "annotations": {
+    "changelogDate": "20240805104942"
+  },
+  "dto": "no",
+  "fields": [
+    {
+      "fieldName": "contact_Name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "account_Name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "contact_Owner",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Contacts",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}
