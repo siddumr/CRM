@@ -7,18 +7,18 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 interface PieChartProps {
   data: {
     totalLeads: number;
-    newLeadsCount: number;
-    closedLeadsCount: number;
+    totalContacts: number;
+    totalMeetings: number;
   };
   size?: { width: number; height: number };
 }
 
 const PieChart: React.FC<PieChartProps> = ({ data, size }) => {
   const pieData = {
-    labels: ['New Leads', 'Closed Leads', 'Other Leads'],
+    labels: ['Total Leads', 'Total Contacts', 'Total Meetings'],
     datasets: [
       {
-        data: [data.newLeadsCount, data.closedLeadsCount, data.totalLeads - data.newLeadsCount - data.closedLeadsCount],
+        data: [data.totalLeads, data.totalContacts, data.totalMeetings],
         backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
         hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
       },

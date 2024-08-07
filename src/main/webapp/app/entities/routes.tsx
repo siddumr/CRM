@@ -7,6 +7,7 @@ import Lead from './lead';
 import PricingComponent from 'app/modules/home/PricingComponent';
 import Contacts from './contacts';
 import Meeting from './meeting';
+import Task from './task';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -18,6 +19,7 @@ export default () => {
         <Route path="lead/*" element={<Lead />} />
         <Route path="contacts/*" element={<Contacts />} />
         <Route path="meeting/*" element={<Meeting />} />
+        <Route path="task/*" element={<Task />} />
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </ErrorBoundaryRoutes>
     </div>

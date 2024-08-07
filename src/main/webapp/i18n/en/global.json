@@ -10,7 +10,8 @@
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
         "lead": "Lead",
         "contacts": "Contacts",
-        "meeting": "Meeting"
+        "meeting": "Meeting",
+        "task": "Task"
       },
       "account": {
         "main": "Account",

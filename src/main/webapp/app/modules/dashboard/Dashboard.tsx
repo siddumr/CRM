@@ -8,7 +8,8 @@ import './dashboard.scss';
 import Leads from './Leads';
 import Contacts from './Contacts';
 import DashboardSection from './DashboardSection';
-import Meeting from './Meeting'; // Import the Meeting component
+import MeetingComponent from './Meeting'; // Renamed to MeetingComponent
+import Task from './Task'; // Import the Task component
 
 interface Lead {
   id: number;
@@ -22,8 +23,29 @@ interface Lead {
   created_at: string;
 }
 
+interface Contact {
+  id: number;
+  contact_Name: string;
+  account_Name: string;
+  email: string;
+  phone: string;
+  contact_Owner: string;
+}
+
+interface Meeting {
+  id: number;
+  title: string;
+  from: string;
+  to: string;
+  related_to: string;
+  contact_name: string;
+  host: string;
+}
+
 const NewDashboard: React.FC = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
+  const [contacts, setContacts] = useState<Contact[]>([]);
+  const [meetings, setMeetings] = useState<Meeting[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState('1');
@@ -40,7 +62,31 @@ const NewDashboard: React.FC = () => {
       }
     };
 
+    const fetchContacts = async () => {
+      try {
+        const response = await axios.get('/api/contacts');
+        setContacts(response.data);
+      } catch (err) {
+        setError('Error fetching contacts data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const fetchMeetings = async () => {
+      try {
+        const response = await axios.get('/api/meetings');
+        setMeetings(response.data);
+      } catch (err) {
+        setError('Error fetching meetings data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchLeads();
+    fetchContacts();
+    fetchMeetings();
   }, []);
 
   const changeTab = (tab: string) => {
@@ -77,28 +123,27 @@ const NewDashboard: React.FC = () => {
       <div className="new-content">
         <TabContent activeTab={activeTab}>
           <TabPane tabId="1">
-            <DashboardSection leads={leads} />
+            <DashboardSection leads={leads} contacts={contacts.length} meetings={meetings} />
           </TabPane>
           <TabPane tabId="2">
             <Leads />
           </TabPane>
-          <TabPane tabId="3">
-            <Meeting /> {/* Add the Meeting component here */}
-          </TabPane>
           <TabPane tabId="5">
             <Contacts />
           </TabPane>
+          <TabPane tabId="3">
+            <MeetingComponent />
+          </TabPane>
           <TabPane tabId="6">
             <h2>Accounts</h2>
-            <p>Details about accounts will be here.</p>
+            <p>Accounts will be here.</p>
           </TabPane>
           <TabPane tabId="7">
-            <h2>Tasks</h2>
-            <p>Details about tasks will be here.</p>
+            <Task /> {/* Add Task component here */}
           </TabPane>
           <TabPane tabId="4">
             <h2>Settings</h2>
-            <p>Settings content will be here.</p>
+            <p>Settings will be here.</p>
           </TabPane>
         </TabContent>
       </div>

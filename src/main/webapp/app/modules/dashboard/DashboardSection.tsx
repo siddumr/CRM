@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Card, CardBody, CardTitle, CardText } from 'reactstrap';
 import PieChart from './PieChart';
-import LineChart from './LineChart';
 import BarChart from './BarChart';
+import GaugeChart from './GaugeChart';
+import axios from 'axios';
 
 interface Lead {
   id: number;
@@ -16,24 +17,89 @@ interface Lead {
   created_at: string;
 }
 
-interface DashboardSectionProps {
-  leads: Lead[];
+interface Meeting {
+  id: number;
+  title: string;
+  from: string;
+  to: string;
+  related_to: string;
+  contact_name: string;
+  host: string;
 }
 
-const DashboardSection: React.FC<DashboardSectionProps> = ({ leads }) => {
+interface Task {
+  id: number;
+  subject: string;
+  due_Date: string;
+  status: string;
+  priority: string;
+  related_to: string;
+  task_Owner: string;
+}
+
+interface DashboardSectionProps {
+  leads: Lead[];
+  contacts: number;
+  meetings: Meeting[];
+}
+
+const DashboardSection: React.FC<DashboardSectionProps> = ({ leads, contacts, meetings }) => {
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [completedTasks, setCompletedTasks] = useState<number>(0);
+  const [totalTasks, setTotalTasks] = useState<number>(0);
+
   const totalLeads = leads.length;
-  const newLeadsCount = leads.filter(lead => lead.lead_status === 'New').length;
-  const closedLeadsCount = leads.filter(lead => lead.lead_status === 'Closed').length;
+  const totalMeetings = meetings.length;
+  const totalContacts = contacts;
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await axios.get('/api/tasks'); // Adjust the endpoint as needed
+        const fetchedTasks: Task[] = response.data;
+        setTasks(fetchedTasks);
+
+        const completedCount = fetchedTasks.filter(task => task.status === 'Completed').length;
+        setCompletedTasks(completedCount);
+        setTotalTasks(fetchedTasks.length);
+      } catch (err) {
+        console.error('Error fetching tasks data', err);
+      }
+    };
+
+    fetchTasks();
+  }, []);
+
+  useEffect(() => {
+    console.log('Completed Tasks:', completedTasks);
+    console.log('Total Tasks:', totalTasks);
+  }, [completedTasks, totalTasks]);
 
   const leadsByMonth = leads.reduce((acc: { [key: string]: number }, lead) => {
-    const month = new Date(lead.created_at).toLocaleString('default', { month: 'short' });
+    const month = new Date(lead.created_at).toLocaleString('default', { month: 'short', year: 'numeric' });
     acc[month] = (acc[month] || 0) + 1;
     return acc;
   }, {});
 
   const barChartData = {
     labels: Object.keys(leadsByMonth),
-    values: Object.values(leadsByMonth),
+    datasets: [
+      {
+        label: 'Leads',
+        values: Object.values(leadsByMonth),
+        backgroundColor: '#FF6384',
+      },
+      {
+        label: 'Contacts',
+        values: new Array(Object.keys(leadsByMonth).length).fill(totalContacts),
+        backgroundColor: '#36A2EB',
+      },
+      {
+        label: 'Meetings',
+        values: new Array(Object.keys(leadsByMonth).length).fill(totalMeetings),
+        backgroundColor: '#FFCE56',
+      },
+    ],
   };
 
   return (
@@ -53,33 +119,38 @@ const DashboardSection: React.FC<DashboardSectionProps> = ({ leads }) => {
         <Col md="4">
           <Card>
             <CardBody>
-              <CardTitle tag="h5">New Leads</CardTitle>
-              <CardText>{newLeadsCount}</CardText>
+              <CardTitle tag="h5">Total Contacts</CardTitle>
+              <CardText>{totalContacts}</CardText>
             </CardBody>
           </Card>
         </Col>
         <Col md="4">
           <Card>
             <CardBody>
-              <CardTitle tag="h5">Closed Leads</CardTitle>
-              <CardText>{closedLeadsCount}</CardText>
+              <CardTitle tag="h5">Total Meetings</CardTitle>
+              <CardText>{totalMeetings}</CardText>
             </CardBody>
           </Card>
         </Col>
       </Row>
 
-      <Row>
+      <Row style={{ marginTop: '50px' }}>
         <Col md="6">
-          <PieChart data={{ totalLeads, newLeadsCount, closedLeadsCount }} size={{ width: 300, height: 300 }} />
+          <PieChart data={{ totalLeads, totalContacts, totalMeetings }} size={{ width: 300, height: 300 }} />
         </Col>
         <Col md="6">
-          <LineChart data={leads} size={{ width: 400, height: 300 }} />
+          <BarChart data={barChartData} size={{ width: 400, height: 300 }} />
         </Col>
       </Row>
 
-      <Row>
-        <Col md="6">
-          <BarChart data={barChartData} size={{ width: 400, height: 300 }} />
+      <Row style={{ marginTop: '50px' }}>
+        <Col md="12">
+          <Card>
+            <CardBody>
+              <CardTitle tag="h5">Task Progress</CardTitle>
+              <GaugeChart gaugeValue={completedTasks} maxValue={totalTasks} />
+            </CardBody>
+          </Card>
         </Col>
       </Row>
     </>

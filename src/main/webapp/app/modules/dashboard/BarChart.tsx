@@ -1,30 +1,45 @@
-// BarChart.tsx
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from 'chart.js';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 interface BarChartProps {
-  data: { labels: string[]; values: number[] };
-  size: { width: number; height: number };
+  data: {
+    labels: string[];
+    datasets: {
+      label: string;
+      values: number[];
+      backgroundColor: string;
+    }[];
+  };
+  size?: { width: number; height: number };
 }
 
 const BarChart: React.FC<BarChartProps> = ({ data, size }) => {
   const chartData = {
     labels: data.labels,
-    datasets: [
-      {
-        label: 'Leads',
-        data: data.values,
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1,
-      },
-    ],
+    datasets: data.datasets.map(dataset => ({
+      label: dataset.label,
+      data: dataset.values,
+      backgroundColor: dataset.backgroundColor,
+    })),
   };
 
-  return <Bar data={chartData} width={size.width} height={size.height} options={{ responsive: true }} />;
+  const options = {
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
+
+  return (
+    <div style={{ width: size?.width, height: size?.height }}>
+      <Bar data={chartData} options={options} />
+    </div>
+  );
 };
 
 export default BarChart;
