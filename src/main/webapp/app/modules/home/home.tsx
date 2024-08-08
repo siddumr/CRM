@@ -63,7 +63,7 @@ export const Home = () => {
               </div>
               <div>
                 <img
-                  src="https://img.freepik.com/premium-photo/man-drawing-colorful-light-bulb_1077205-4750.jpg?ga=GA1.1.688353063.1686149813&semt=ais_hybrid"
+                  src="https://img.freepik.com/premium-photo/crm-customer-relationship-management-concept-businessman-using-crm-software-business-marketing-customer-management_10541-9350.jpg?size=626&ext=jpg&ga=GA1.1.688353063.1686149813&semt=ais_hybrid"
                   alt="Slide 3"
                   className="img-fluid"
                 />

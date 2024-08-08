@@ -17,6 +17,7 @@ import {
   Input,
 } from 'reactstrap';
 import './Leads.scss';
+import { Link } from 'react-router-dom';
 
 interface Lead {
   id: number;
@@ -98,8 +99,9 @@ const Leads: React.FC = () => {
           onChange={handleFilterChange}
           className="filter-input"
         />
+
         <Button color="success" onClick={createLead} className="create-button">
-          Create Lead
+          <Link to="/lead"> Create Lead</Link>
         </Button>
       </div>
       {loading && <Spinner color="primary" />}

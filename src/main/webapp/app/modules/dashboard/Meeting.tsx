@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Spinner, Alert } from 'reactstrap';
+import { FaCalendarAlt, FaUserAlt, FaBuilding, FaUserTie } from 'react-icons/fa';
 import './Meeting.scss'; // Ensure you have custom CSS for styling
 
 interface Meeting {
@@ -41,22 +42,24 @@ const Meeting: React.FC = () => {
       {error && <Alert color="danger">{error}</Alert>}
       <div className="timeline">
         {meetings.length > 0
-          ? meetings.map((meeting, index) => (
+          ? meetings.map(meeting => (
               <div className="timeline-item" key={meeting.id}>
                 <div className="timeline-date">{meeting.from}</div>
                 <div className="timeline-content">
-                  <h5>{meeting.title}</h5>
+                  <h5>
+                    <FaCalendarAlt /> {meeting.title}
+                  </h5>
                   <p>
-                    <strong>To:</strong> {meeting.to}
+                    <FaCalendarAlt /> <strong>To:</strong> {meeting.to}
                   </p>
                   <p>
-                    <strong>Related To:</strong> {meeting.realated_to}
+                    <FaBuilding /> <strong>Related To:</strong> {meeting.realated_to}
                   </p>
                   <p>
-                    <strong>Contact Name:</strong> {meeting.contact_name}
+                    <FaUserAlt /> <strong>Contact Name:</strong> {meeting.contact_name}
                   </p>
                   <p>
-                    <strong>Host:</strong> {meeting.host}
+                    <FaUserTie /> <strong>Host:</strong> {meeting.host}
                   </p>
                 </div>
               </div>

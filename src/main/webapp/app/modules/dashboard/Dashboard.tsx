@@ -109,11 +109,11 @@ const NewDashboard: React.FC = () => {
         <Button className={classnames({ active: activeTab === '3' })} onClick={() => changeTab('3')}>
           <FontAwesomeIcon icon={faUsers} /> Meetings
         </Button>
-        <Button className={classnames({ active: activeTab === '6' })} onClick={() => changeTab('6')}>
-          <FontAwesomeIcon icon={faBuilding} /> Accounts
-        </Button>
         <Button className={classnames({ active: activeTab === '7' })} onClick={() => changeTab('7')}>
           <FontAwesomeIcon icon={faTasks} /> Tasks
+        </Button>
+        <Button className={classnames({ active: activeTab === '6' })} onClick={() => changeTab('6')}>
+          <FontAwesomeIcon icon={faBuilding} /> Accounts
         </Button>
         <Button className={classnames({ active: activeTab === '4' })} onClick={() => changeTab('4')}>
           <FontAwesomeIcon icon={faCog} /> Settings

@@ -31,6 +31,7 @@ const Dashboard = Loadable({
   loader: () => import(/* webpackChunkName: "home" */ 'app/modules/dashboard/Dashboard'),
   loading: () => loading,
 });
+
 const AppRoutes = () => {
   return (
     <div className="view-routes">

@@ -3,6 +3,7 @@ import { Row, Col, Card, CardBody, CardTitle, CardText } from 'reactstrap';
 import PieChart from './PieChart';
 import BarChart from './BarChart';
 import GaugeChart from './GaugeChart';
+import CustomRadarChart from './CustomRadarChart'; // Import the CustomRadarChart component
 import axios from 'axios';
 
 interface Lead {
@@ -102,6 +103,14 @@ const DashboardSection: React.FC<DashboardSectionProps> = ({ leads, contacts, me
     ],
   };
 
+  const radarChartData = [
+    { subject: 'Leads', value: totalLeads },
+    { subject: 'Contacts', value: totalContacts },
+    { subject: 'Meetings', value: totalMeetings },
+    { subject: 'Tasks', value: totalTasks },
+    { subject: 'Completed Tasks', value: completedTasks },
+  ];
+
   return (
     <>
       <h1>User Dashboard</h1>
@@ -144,10 +153,13 @@ const DashboardSection: React.FC<DashboardSectionProps> = ({ leads, contacts, me
       </Row>
 
       <Row style={{ marginTop: '50px' }}>
-        <Col md="12">
+        <Col md="6">
+          <CustomRadarChart data={radarChartData} />
+        </Col>
+        <Col md="6">
           <Card>
             <CardBody>
-              <CardTitle tag="h5">Task Progress</CardTitle>
+              <CardTitle tag="h5">Task Completion</CardTitle>
               <GaugeChart gaugeValue={completedTasks} maxValue={totalTasks} />
             </CardBody>
           </Card>
