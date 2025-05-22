@@ -34,6 +34,14 @@ UI Library: Material-UI (MUI)
 
 Routing: React Router
 
+Charts & Animations: Recharts, Framer Motion
+
+State Management: useState, useEffect (React Hooks)
+
+Authentication: JWT/localStorage (or as implemented)
+
+Backend (Optional/Planned): Node.js, Express, MongoDB
+
 ![IMG-20250522-WA0003](https://github.com/user-attachments/assets/9ad9e734-7cb7-4fd0-bdaf-d541ee81faa5)
 
 ![IMG-20250522-WA0009](https://github.com/user-attachments/assets/7dbd2701-846c-4d8e-b3d2-5802c4a29aa1)
@@ -45,10 +53,3 @@ Routing: React Router
 
 
 
-Charts & Animations: Recharts, Framer Motion
-
-State Management: useState, useEffect (React Hooks)
-
-Authentication: JWT/localStorage (or as implemented)
-
-Backend (Optional/Planned): Node.js, Express, MongoDB
