@@ -34,6 +34,17 @@ UI Library: Material-UI (MUI)
 
 Routing: React Router
 
+![IMG-20250522-WA0003](https://github.com/user-attachments/assets/9ad9e734-7cb7-4fd0-bdaf-d541ee81faa5)
+
+![IMG-20250522-WA0009](https://github.com/user-attachments/assets/7dbd2701-846c-4d8e-b3d2-5802c4a29aa1)
+![IMG-20250522-WA0008](https://github.com/user-attachments/assets/09ed55b2-0d31-4c5d-8404-51a8ddef93fe)
+![IMG-20250522-WA0005](https://github.com/user-attachments/assets/8945b9d8-f4a7-4eae-86a0-afff51dddfb3)
+![IMG-20250522-WA0006](https://github.com/user-attachments/assets/33c4da75-b0b8-4f8c-a192-708822e1b39b)
+
+
+
+
+
 Charts & Animations: Recharts, Framer Motion
 
 State Management: useState, useEffect (React Hooks)
